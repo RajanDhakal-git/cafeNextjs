@@ -6,7 +6,6 @@ import Card from "./Card"
 
 const Home = () => {
     const { allData } = useMycontext()
-    console.log(allData)
     return (
         <div
             className="min-h-screen  bg-white w-full flex gap-4 p-5">

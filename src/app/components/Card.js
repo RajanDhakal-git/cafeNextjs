@@ -1,11 +1,12 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useMycontext } from "../store/ContextProvider"
 
 const Card = ({strMeal ,strMealThumb ,strInstructions, idMeal, price}) => {
     const {push} = useRouter()
-    // Generate a random price if not provided
-    const displayPrice = price || (Math.floor(Math.random() * 200) + 100) / 10;
+  const {sendorderreq} = useMycontext()
+    const displayPrice = (Math.floor(Math.random() * 200) + 100) / 10;
     return (
         <div className="flex justify-center items-center min-h-[60vh]">
             <div className="card bg-white w-96 shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300">
@@ -28,7 +29,9 @@ const Card = ({strMeal ,strMealThumb ,strInstructions, idMeal, price}) => {
                     </h2>
                     <p className='line-clamp-3 text-gray-600 text-center mb-4'>{strInstructions}</p>
                     <div className="flex gap-3 w-full justify-center">
-                        <button className="btn btn-primary rounded-full px-6 py-2 font-semibold text-lg shadow-md hover:scale-105 transition-transform duration-200">
+                        <button
+                        onClick={()=>sendorderreq({strMeal ,strMealThumb ,strInstructions, idMeal, displayPrice ,tbnumb:1})}
+                         className="btn btn-primary rounded-full px-6 py-2 font-semibold text-lg shadow-md hover:scale-105 transition-transform duration-200">
                             Order Now
                         </button>
                         <button className="btn btn-outline btn-secondary rounded-full px-6 py-2 font-semibold text-lg hover:bg-secondary hover:text-white transition-colors duration-200">
