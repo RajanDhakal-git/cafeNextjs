@@ -20,6 +20,9 @@ export async function POST(req) {
       tableNumber: value?.tbnumb,
     });
     console.log(order)
+    if (global._io) {
+      global._io.emit('newOrder', { message: 'A new order was placed!' });
+    }
     return NextResponse.json({ success: true, value });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
